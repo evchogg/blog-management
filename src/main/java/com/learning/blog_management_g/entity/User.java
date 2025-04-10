@@ -32,8 +32,12 @@ public class User {
     @Column(name = "role")
     private String role;
 
+    @OneToMany(mappedBy = "user")
+    @JsonIgnore
     private List<Comment> comments;
 
+    @OneToMany(mappedBy = "user")
+    @JsonIgnore
     private List<Blog> blogs;
 
 }

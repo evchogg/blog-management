@@ -2,10 +2,7 @@ package com.learning.blog_management_g.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.learning.blog_management_g.constants.Status;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.List;
@@ -24,8 +21,12 @@ public class Blog {
 
     private String description;
 
+    @OneToMany(mappedBy = "blog")
+    @JsonIgnore
     private List<Comment> comments;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
     private User user;
 
     private Status status;
