@@ -39,4 +39,10 @@ public class UserController {
         return ResponseEntity.ok(userService.searchUsers(searchParams));
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteUser(@PathVariable Integer id) {
+        userService.deleteUserById(id);
+        return ResponseEntity.ok("User deleted successfully");
+    }
+
 }

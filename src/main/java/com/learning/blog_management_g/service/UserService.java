@@ -2,7 +2,9 @@ package com.learning.blog_management_g.service;
 
 
 import com.learning.blog_management_g.constants.EmailValidator;
+import com.learning.blog_management_g.constants.ErrorType;
 import com.learning.blog_management_g.entity.User;
+import com.learning.blog_management_g.exceptions.UserException;
 import com.learning.blog_management_g.repository.UserRepository;
 import com.learning.blog_management_g.specification.GenericSpecification;
 import org.springframework.data.jpa.domain.Specification;
@@ -34,6 +36,11 @@ public class UserService {
     public List<User> searchUsers(Map<String, String> searchParams) {
         Specification<User> spec = new GenericSpecification<>(searchParams);
         return userRepository.findAll(spec);
+    }
+
+    public void deleteUserById(Integer id) {
+        User user = userRepository.findById(id).orElseThrow(() -> new UserException(ErrorType.NOT_FOUND, "User not found with id:"+ id));
+        userRepository.deleteById(id);
     }
 
 
