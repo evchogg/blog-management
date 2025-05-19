@@ -1,6 +1,7 @@
 package com.learning.blog_management_g.controller;
 
 import com.learning.blog_management_g.entity.User;
+import com.learning.blog_management_g.entity_dto.UserDTO;
 import com.learning.blog_management_g.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +22,7 @@ public class UserController {
     }
 
     @GetMapping
-    public List<User> getAllUsers() {
+    public List<UserDTO> getAllUsers() {
         return userService.getAllUsers();
     }
 
@@ -34,8 +35,7 @@ public class UserController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<List<User>> searchUsers(@RequestParam Map<String, String> searchParams) {
-        List<User> users = userService.searchUsers(searchParams);
+    public ResponseEntity<List<UserDTO>> searchUsers(@RequestParam Map<String, String> searchParams) {
         return ResponseEntity.ok(userService.searchUsers(searchParams));
     }
 
